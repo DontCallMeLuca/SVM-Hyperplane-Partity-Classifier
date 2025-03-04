@@ -85,7 +85,7 @@ To be more precise, assume that:
 \mathcal{H}_{-1} = \{\mathbf{x} \in \mathbb{R}^p : w_0 + \mathbf{w}^{\top} \mathbf{x} = -1\}
 ```
 
-are also separating hyperplanes. It can be shown that the distance between $\mathcal{H}_1$ and $\mathcal{H}_{-1}$ is $2/||\mathbf{w}||$. We want to maximize this distance over all $w_0$ and $\mathbf{w}$ which $\mathcal{H}_1$ and $\mathcal{H}_{-1}$ are separating hyperplanes. This is equivalent to solving:
+are also separating hyperplanes. It can be shown that the distance between $H$ and $H_{-1}$ is $2/||\mathbf{w}||$. We want to maximize this distance over all $w_0$ and $\mathbf{w}$ which $H$ and $H_{-1}$ are separating hyperplanes. This is equivalent to solving:
 
 ```math
 \begin{align}
@@ -104,7 +104,7 @@ Simplifying:
 \end{align}
 ```
 
-In the literature, this problem is often referred to as a **hard-margin** SVM, since the area (also called the margin) between hyperplanes $\mathcal{H}_1$ and $\mathcal{H}_{-1}$ does not contain any observations. In other words, the classification constraint is hard.
+In the literature, this problem is often referred to as a **hard-margin** SVM, since the area (also called the margin) between hyperplanes $H$ and $H_{-1}$ does not contain any observations. In other words, the classification constraint is hard.
 
 But what if there are no separating hyperplanes? It is not hard to find data sets for which any hyperplane will misclassify one or more observations. To put it mathematically, there are data sets such that for any $w_0\in\mathbb{R}$ and $\mathbf{w}\in\mathbb{R}^p$, there exits some observation $(\mathbf{x}_i,y_i)$ with:
 
@@ -132,7 +132,7 @@ for observation $i = 1,...,N$. It could now happen that the prediction $\hat{y}\
 \max\{0, 1 - y_i(w_0 + \boldsymbol{w}^\top \boldsymbol{x}_i)\}
 ```
 
-for observation $i = 1,...,N$. If observation $i$ is on the correct sides of the hyperplanes $\mathcal{H}_1$ and $\mathcal{H}_{-1}$, then:
+for observation $i = 1,...,N$. If observation $i$ is on the correct sides of the hyperplanes $H$ and $H_{-1}$, then:
 
 ```math
 y_i(w_0+\boldsymbol{w}^T\boldsymbol{x}_i) \geq 1
@@ -162,7 +162,6 @@ The pseudocode algorithm is as follows:
 \begin{array}{ll}
 \textbf{Input:} & \text{Loss function } f \text{ as in (2); fixed step length } \alpha > 0; \text{ tolerance } \epsilon > 0. \\
 \textbf{Output:} & \text{Iterates of subgradient descent applied to } f. \\
-\hline
 1: & \text{Initialize } k \leftarrow 0 \text{ and } \bar{\boldsymbol{w}}_0 \leftarrow \boldsymbol{0}. \\
 2: & \textbf{while } k \leq 1 \text{ or } |f(\bar{\boldsymbol{w}}_k) - f(\bar{\boldsymbol{w}}_{k-1})| > \epsilon \textbf{ do} \\
 3: & \quad \text{Compute a subgradient } \boldsymbol{r}_k \text{ from } \partial f(\bar{\boldsymbol{w}}_k) \\
